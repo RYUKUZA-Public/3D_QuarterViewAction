@@ -135,12 +135,13 @@ GameObject:
   - component: {fileID: 134700289}
   - component: {fileID: 134700288}
   - component: {fileID: 134700287}
+  - component: {fileID: 134700291}
   m_Layer: 0
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!65 &134700287
 BoxCollider:
@@ -220,6 +221,22 @@ Transform:
   m_Father: {fileID: 1166513191}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &134700291
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 134700286}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &369273804
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -227,6 +244,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 369273807, guid: 6a96445e2f20e444f99604cdb1cf6e7e, type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1696522918062662795, guid: 6a96445e2f20e444f99604cdb1cf6e7e, type: 3}
+      propertyPath: moveSpeed
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 5540633944302776131, guid: 6a96445e2f20e444f99604cdb1cf6e7e, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -487,12 +512,13 @@ GameObject:
   - component: {fileID: 1090881039}
   - component: {fileID: 1090881038}
   - component: {fileID: 1090881037}
+  - component: {fileID: 1090881041}
   m_Layer: 0
   m_Name: Wall_Show_01
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!65 &1090881037
 BoxCollider:
@@ -501,7 +527,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1090881036}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: c1214c1275852824ba4fe939cbaee603, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -572,6 +598,22 @@ Transform:
   m_Father: {fileID: 1166513191}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &1090881041
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1090881036}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1095173076
 GameObject:
   m_ObjectHideFlags: 0
@@ -584,12 +626,13 @@ GameObject:
   - component: {fileID: 1095173079}
   - component: {fileID: 1095173078}
   - component: {fileID: 1095173077}
+  - component: {fileID: 1095173081}
   m_Layer: 0
   m_Name: Wall_Hide_00
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!65 &1095173077
 BoxCollider:
@@ -598,7 +641,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1095173076}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: c1214c1275852824ba4fe939cbaee603, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -669,6 +712,22 @@ Transform:
   m_Father: {fileID: 1166513191}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &1095173081
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1095173076}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1166513190
 GameObject:
   m_ObjectHideFlags: 0
@@ -717,12 +776,13 @@ GameObject:
   - component: {fileID: 1850336102}
   - component: {fileID: 1850336101}
   - component: {fileID: 1850336100}
+  - component: {fileID: 1850336104}
   m_Layer: 0
   m_Name: Wall_Show_00
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!65 &1850336100
 BoxCollider:
@@ -731,7 +791,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1850336099}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: c1214c1275852824ba4fe939cbaee603, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -802,6 +862,22 @@ Transform:
   m_Father: {fileID: 1166513191}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &1850336104
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1850336099}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1871231455
 GameObject:
   m_ObjectHideFlags: 0
@@ -814,12 +890,13 @@ GameObject:
   - component: {fileID: 1871231458}
   - component: {fileID: 1871231457}
   - component: {fileID: 1871231456}
+  - component: {fileID: 1871231460}
   m_Layer: 0
   m_Name: Wall_Hide_01
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!65 &1871231456
 BoxCollider:
@@ -828,7 +905,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1871231455}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: c1214c1275852824ba4fe939cbaee603, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -899,3 +976,19 @@ Transform:
   m_Father: {fileID: 1166513191}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &1871231460
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1871231455}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
