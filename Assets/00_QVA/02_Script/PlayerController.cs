@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -10,19 +11,39 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     [SerializeField]
     private float moveSpeed = 100f;
-
+    /// <summary>
+    /// 着用可能な武器
+    /// </summary>
+    [SerializeField]
+    private GameObject[] weapons;
+    /// <summary>
+    /// 保有している武器
+    /// </summary>
+    [SerializeField]
+    private bool[] hasWeapons;
+    
     // 水平入力値
     private float _hAxis;
     // 垂直入力値
     private float _vAxis;
     // Walkボタンが、押されたかどうか
     private bool _walkDown;
-    private bool _JumpDown;
+    // Jumpボタンが、押されたかどうか
+    private bool _jumpDown;
+    // 相互作用ボタンが、押されたかどうか
+    private bool _interactionDown;
+    // 武器交換 1ボタンが、押されたかどうか
+    private bool _swapOneDown;
+    // 武器交換 2ボタンが、押されたかどうか
+    private bool _swapTwoDown;
+    // 武器交換 3ボタンが、押されたかどうか
+    private bool _swapThreeDown;
+    
     // ジャンプ中？
     private bool _isJump;
     // 回避中？
     private bool _isDodge;
-    
+
     // 移動Vector
     private Vector3 _moveVec;
     // 回避Vector (回避アクション中の方向移動を禁じるため)
@@ -34,6 +55,13 @@ public class PlayerController : MonoBehaviour
     private Rigidbody _rigidbody;
     // 移動Vector 事前正規化
     private static readonly Vector3 NormalizedVector3 = new Vector3(0f, 0f, 1f);
+
+    // 獲得するアイテム
+    private GameObject _nearObj;
+    // 現在装着中のアイテム
+    private GameObject _equipWeapon;
+    // 現在装着中のアイテムIndex
+    private int _equipWeaponIndex = -1;
 
     /// <summary>
     /// 初期化
@@ -56,6 +84,8 @@ public class PlayerController : MonoBehaviour
         Rotation();
         Jump();
         Dodge();
+        Interaction();
+        Swap();
     }
 
     /// <summary>
@@ -74,7 +104,12 @@ public class PlayerController : MonoBehaviour
         
         // Walkボタンの入力を受ける
         _walkDown = Input.GetButton("Walk");
-        _JumpDown= Input.GetButtonDown("Jump");
+        _jumpDown= Input.GetButtonDown("Jump");
+        _interactionDown = Input.GetButtonDown("Interaction");
+        
+        _swapOneDown = Input.GetButtonDown("Swap1");
+        _swapTwoDown = Input.GetButtonDown("Swap2");
+        _swapThreeDown = Input.GetButtonDown("Swap3");
     }
 
     /// <summary>
@@ -111,7 +146,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void Jump()
     {
-        if (_JumpDown && !_isJump && _moveVec == Vector3.zero && !_isDodge)
+        if (_jumpDown && !_isJump && _moveVec == Vector3.zero && !_isDodge)
         {
             _rigidbody.AddForce(Vector3.up * 10f, ForceMode.Impulse);
             _animator.SetTrigger("doJump");
@@ -124,7 +159,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void Dodge()
     {
-        if (_JumpDown && !_isJump && _moveVec != Vector3.zero && !_isDodge)
+        if (_jumpDown && !_isJump && _moveVec != Vector3.zero && !_isDodge)
         {
             // 回避した方向取得
             _dodgeVec = _moveVec;
@@ -148,9 +183,72 @@ public class PlayerController : MonoBehaviour
         _isDodge = false;
     }
 
+    /// <summary>
+    /// 武器変更
+    /// </summary>
+    private void Swap()
+    {
+        if (_swapOneDown && (!hasWeapons[0] || _equipWeaponIndex == 0))
+            return;
+        if (_swapTwoDown && (!hasWeapons[1] || _equipWeaponIndex == 1))
+            return;
+        if (_swapThreeDown && (!hasWeapons[2] || _equipWeaponIndex == 2))
+            return;
+        
+        
+        int weaponIndex = -1;
+
+        if (_swapOneDown) weaponIndex = 0;
+        if (_swapTwoDown) weaponIndex = 1;
+        if (_swapThreeDown) weaponIndex = 2;
+        
+        if (_swapOneDown || _swapTwoDown || _swapThreeDown && !_isJump && !_isDodge)
+        {
+            if (_equipWeapon != null)
+                _equipWeapon.SetActive(false);
+
+            _equipWeaponIndex = weaponIndex;
+            _equipWeapon = weapons[weaponIndex];
+            _equipWeapon.SetActive(true);
+        }
+    }
+
+    /// <summary>
+    /// アイテム獲得
+    /// </summary>
+    private void Interaction()
+    {
+        if (_interactionDown && _nearObj != null && !_isJump && !_isDodge)
+        {
+            if (_nearObj.CompareTag("Weapon"))
+            {
+                Item item = _nearObj.GetComponent<Item>();
+                int weaponIndex = item.value;
+                hasWeapons[weaponIndex] = true;
+                //weapons[weaponIndex].SetActive(true);
+                Destroy(_nearObj);
+            }
+        }
+    }
+
+    /// <summary>
+    /// 地面でない場合はジャンプできない。
+    /// </summary>
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Floor"))
             _isJump = false;
+    }
+    
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Weapon"))
+            _nearObj = other.gameObject;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Weapon"))
+            _nearObj = null;
     }
 }
